@@ -1,5 +1,7 @@
 const fs = require("fs");
 const http = require("http");
+const path = require("path");
+const { json } = require("stream/consumers");
 const url = require("url");
 
 // const path = "1-node-farm/starter/txt/";
@@ -33,9 +35,20 @@ const url = require("url");
 
 //serve
 
+const data = fs.readFileSync("./dev-data/data.json", "utf-8");
+const dataObj = JSON.parse(data);
+console.log(dataObj);
 const server = http.createServer((req, res) => {
-  console.log(req.url);
-  res.end("this the server");
+  const pathName = req.url;
+
+  if (pathName === "/overview") {
+    res.end("this overview");
+  } else if (pathName === "/api") {
+    res.writeHead(200, {
+      "Content-type": "application/json",
+    });
+    res.end(data);
+  } else res.end("this the server");
 });
 
 server.listen(8000, "127.0.0.1");
