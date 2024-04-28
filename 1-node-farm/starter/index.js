@@ -37,18 +37,29 @@ const url = require("url");
 
 const data = fs.readFileSync("./dev-data/data.json", "utf-8");
 const dataObj = JSON.parse(data);
-console.log(dataObj);
+
 const server = http.createServer((req, res) => {
   const pathName = req.url;
+  // overview page:
 
-  if (pathName === "/overview") {
+  if (pathName === "/overview" || pathName === "/") {
     res.end("this overview");
   } else if (pathName === "/api") {
+    // data:
+
     res.writeHead(200, {
       "Content-type": "application/json",
     });
     res.end(data);
-  } else res.end("this the server");
+  } else {
+    // error:
+
+    res.writeHead(404, {
+      "Content-type": "text/html",
+      "my-own-header": "hello Jaian",
+    });
+    res.end("<h1>Page not found</h1>");
+  }
 });
 
 server.listen(8000, "127.0.0.1");
