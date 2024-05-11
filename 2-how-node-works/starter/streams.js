@@ -17,8 +17,13 @@ server.on("request", (req, res) => {
   //     res.write(chunk);
   //   });
   //   readable.on("end", () => res.end());
-
+  // readble.0n('error', err => {
+  //     console.log(err);
+  //     res.statusCode = 500;
+  //     res.end('file not found');
+  // })
   //3
+  // handle problem of backpressure;
 
   const readable = fs.createReadStream("test-file.txt");
   readable.pipe(res);
