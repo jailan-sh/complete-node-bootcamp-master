@@ -39,8 +39,11 @@ const getDogPic = async () => {
 };
 
 console.log('will');
-const x = getDogPic();
-console.log(x);
+getDogPic().then((x) => {
+  console.log(x);
+  console.log('this is it');
+});
+
 console.log('dodo');
 /*
 // promisefy process
