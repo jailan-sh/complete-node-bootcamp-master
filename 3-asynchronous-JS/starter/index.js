@@ -23,6 +23,26 @@ const filewritepro = (file, data) => {
   });
 };
 
+const getDogPic = async () => {
+  try {
+    const data = await filereadpro(`${__dirname}/dog.txt`);
+    const result = await superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    console.log(result.body.message);
+    await filewritepro('dog_pic.txt', result.body.message);
+    console.log('done');
+  } catch (err) {
+    console.log(err.message);
+  }
+  return 'to be ';
+};
+
+console.log('will');
+const x = getDogPic();
+console.log(x);
+console.log('dodo');
+/*
 // promisefy process
 filereadpro(`${__dirname}/dog.txt`)
   .then((data) => {
@@ -34,21 +54,21 @@ filereadpro(`${__dirname}/dog.txt`)
   })
   .then(() => console.log('did it ❤'))
   .catch((err) => console.log(err.message));
+*/
 
 //callback hell
+/*
+fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
+  console.log(` this: ${data}`);
+  superagent
+    .get(`https://dog.ceo/api/breed/${data}/images/random`)
+    .then((res) => {
+      console.log(res.body.message);
 
-// fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
-//   console.log(` this: ${data}`);
-//   superagent
-//     .get(`https://dog.ceo/api/breed/${data}/images/random`)
-//     .then((res) => {
-//       console.log(res.body.message);
-
-//       fs.writeFile('dog_pic.txt', res.body.message, (err) => {
-//         console.log('done with picture');
-//       });
-//     })
-//     .catch((err) => console.log(err.message));
-// });
-
-// async wait:
+      fs.writeFile('dog_pic.txt', res.body.message, (err) => {
+        console.log('done with picture');
+      });
+    })
+    .catch((err) => console.log(err.message));
+});
+*/
