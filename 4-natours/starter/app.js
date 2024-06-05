@@ -64,6 +64,43 @@ app.post(`/api/v1/tours`, (req, res) => {
   //res.send('done');
 });
 
+//patch request to update data:
+app.patch('/api/v1/tours/:id', (req, res) => {
+  const id = +req.params.id;
+  const tour = tours.find((ell) => ell.id === id);
+  if (!tour) {
+    return res.status(404).json({
+      status: 'fail',
+      Message: 'invalid id',
+    });
+  }
+  // need to update it then chnge it in file then send it
+  //
+  //
+  res.status(200).json({
+    statuse: 'success',
+    data: {
+      tour,
+    },
+  });
+});
+
+// delete method:
+app.delete('/api/v1/tours/:id', (req, res) => {
+  const tour = tours.find((ell) => ell.id === +req.params.id);
+  if (!tour) {
+    return res.status(404).json({
+      status: 'fail',
+      Message: 'invalid id',
+    });
+  }
+  res.status(204).json({
+    statuse: 'success',
+    data: null,
+  });
+});
+
+// start server
 const port = 3000;
 app.listen(port, () => {
   console.log(`u r listening to server at port ${port}.....`);
