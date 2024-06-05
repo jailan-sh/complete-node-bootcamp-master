@@ -1,10 +1,14 @@
 const express = require('express');
 const fs = require('fs');
+const morgan = require('morgan');
 
 const app = express();
 
 //middleware:
+
 app.use(express.json());
+app.use(morgan('dev'));
+
 app.use((req, res, next) => {
   req.time = new Date().toISOString();
   next();
@@ -15,7 +19,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`, 'utf-8')
 );
 
-// gst methods:
+// route handlers:
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
