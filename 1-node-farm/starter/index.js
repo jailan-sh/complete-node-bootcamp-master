@@ -6,35 +6,6 @@ const url = require("url");
 const slugify = require("slugify");
 const replaceTemplate = require("./modules/replaceTemplate");
 
-// const path = "1-node-farm/starter/txt/";
-
-// blocking, synchronous:
-
-// const text = fs.readFileSync(`${path}input.txt`, "utf-8");
-// console.log(text);
-
-// const textOut = `this new text to the old one which was avocado ${text}. \n created on ${Date.now()}.`;
-// fs.writeFileSync(`${path}output.txt`, textOut);
-
-// fs.appendFileSync(`${path}input.txt`, textOut, "utf-8");
-
-// const newTextIn = fs.readFileSync(`${path}input.txt`, "utf-8");
-// console.log(newTextIn);
-
-// nonblocking, ascnchronous:
-
-// fs.readFile(`${path}start.txt`, "utf-8", (err, data1) => {
-//   fs.readFile(`${path}${data1}.txt`, "utf-8", (err, data2) => {
-//     fs.readFile(`${path}append.txt`, "utf-8", (err, data3) => {
-//       fs.writeFile(`${path}final.txt`, `${data2}\n${data3}`, "utf-8", (err) => {
-//         console.log("we did it 😁");
-//       });
-//     });
-//   });
-// });
-// console.log("try to do asynchronous code");
-///////////////////////////////////////////////////////////////////////////////////
-
 //serve
 
 const tempOverview = fs.readFileSync(
@@ -53,8 +24,6 @@ const tempProduct = fs.readFileSync(
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObj = JSON.parse(data);
 console.log(slugify("fresh avocado", { lower: true }));
-
-
 
 const server = http.createServer((req, res) => {
   const { query, pathname } = url.parse(req.url, true);
@@ -100,3 +69,32 @@ const server = http.createServer((req, res) => {
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listening to requests on port 8000");
 });
+
+// const path = "1-node-farm/starter/txt/";
+
+// blocking, synchronous:
+
+// const text = fs.readFileSync(`${path}input.txt`, "utf-8");
+// console.log(text);
+
+// const textOut = `this new text to the old one which was avocado ${text}. \n created on ${Date.now()}.`;
+// fs.writeFileSync(`${path}output.txt`, textOut);
+
+// fs.appendFileSync(`${path}input.txt`, textOut, "utf-8");
+
+// const newTextIn = fs.readFileSync(`${path}input.txt`, "utf-8");
+// console.log(newTextIn);
+
+// nonblocking, ascnchronous:
+
+// fs.readFile(`${path}start.txt`, "utf-8", (err, data1) => {
+//   fs.readFile(`${path}${data1}.txt`, "utf-8", (err, data2) => {
+//     fs.readFile(`${path}append.txt`, "utf-8", (err, data3) => {
+//       fs.writeFile(`${path}final.txt`, `${data2}\n${data3}`, "utf-8", (err) => {
+//         console.log("we did it 😁");
+//       });
+//     });
+//   });
+// });
+// console.log("try to do asynchronous code");
+///////////////////////////////////////////////////////////////////////////////////
